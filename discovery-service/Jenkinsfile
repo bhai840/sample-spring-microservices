@@ -16,7 +16,7 @@ node {
 
         stage('Image') {
             dir ('discovery-service') {
-                def app = docker.build "rahulnallari/sample-spring-microservices:${env.version}"
+                def app = docker.build "rahulnallari/sample-spring-microservices:discovery${env.version}"
                 app.push()
             }
         }
