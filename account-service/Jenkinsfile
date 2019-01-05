@@ -25,7 +25,7 @@ node {
                 def latest = docker.build "registry:account_latest"
                 def login = docker.withRegistry( '', registryCredential )
                 app.push()
-                latest.push
+                latest.push()
             }
         }
 
