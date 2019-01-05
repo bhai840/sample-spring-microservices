@@ -1,7 +1,6 @@
-#!/usr/bin/env groovy
-//using hostname.
+using hostname.
 
-//[code language="java"]
+[code language="java"]
 node {
 
     withMaven(maven:'maven') {
@@ -11,16 +10,8 @@ node {
         }
 
         stage('Build') {
-            def JavaHome = tool name: 'Local_Java', 
-            env.JAVA_HOME = JavaHome
-            
-            // Maven location
-            def mvnHome = tool name: 'localmaven', type: 'hudson.tasks.Maven$MavenInstallation'
-            env.M2_HOME = mvnHome
-
-           // Begin Compile
-           sh '''${MAVEN_HOME}/bin/mvn clean install'''
-          //  sh 'mvn clean install'
+       
+            sh 'mvn clean install'
 
             def pom = readMavenPom file:'pom.xml'
             print pom.version
