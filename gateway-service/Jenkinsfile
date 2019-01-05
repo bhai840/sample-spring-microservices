@@ -1,6 +1,6 @@
 node {
 
-    withMaven(maven:'maven') {
+    withMaven(maven:'localmaven') {
 
         stage('Checkout') {
             git url: 'https://github.com/bhai840/sample-spring-microservices.git', branch: 'master'
