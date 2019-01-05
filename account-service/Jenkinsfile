@@ -20,7 +20,6 @@ node {
             env.version = pom.version
         }
         
-        docker.withRegistry( '', ${registryCredential} ) {
         stage('Image') {
             dir ('account-service') {
                // def registry = "rahulnallari/sample-spring-microservices"
@@ -28,7 +27,7 @@ node {
                 def app = docker.build "${registry}:account${env.version}"
                 def latest = docker.build "${registry}:account_latest"
                 app.push()
-                }
+                
                 //app.push()
                // latest.push()
             }
