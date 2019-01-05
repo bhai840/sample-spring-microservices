@@ -4,6 +4,7 @@
 node {
      def registry = "rahulnallari/sample-spring-microservices"
      def registryCredential = 'dockerhub'
+     def dockerImage = ''
     
     
      withMaven(maven:'localmaven') {  // localmaven is what configured in jenkins global configuration
@@ -24,9 +25,14 @@ node {
             dir ('account-service') {
                // def registry = "rahulnallari/sample-spring-microservices"
               //  def registryCredential = 'dockerhub'
-                def app = docker.build "${registry}:account${env.version}"
-                def latest = docker.build "${registry}:account_latest"
-                app.push()
+                 dockerImage = docker.build "${registry}:account${env.version}"
+             //   def latest = docker.build "${registry}:account_latest"
+              //  app.push()
+                 docker.withRegistry( '', registryCredential ) {
+
+                             dockerImage.push()
+
+                             }
                 
                 //app.push()
                // latest.push()
