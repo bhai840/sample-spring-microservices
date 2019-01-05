@@ -3,7 +3,7 @@ node {
     withMaven(maven:'maven') {
 
         stage('Checkout') {
-            git url: 'https://github.com/piomin/sample-spring-microservices.git', credentialsId: 'github-piomin', branch: 'master'
+            git url: 'https://github.com/bhai840/sample-spring-microservices.git', branch: 'master'
         }
 
         stage('Build') {
@@ -16,14 +16,14 @@ node {
 
         stage('Image') {
             dir ('customer-service') {
-                def app = docker.build "localhost:5000/customer-service:${env.version}"
+                def app = docker.build "rahulnallari/sample-spring-microservices:${env.version}"
                 app.push()
             }
         }
 
-        stage ('Run') {
+       /* stage ('Run') {
             docker.image("localhost:5000/customer-service:${env.version}").run('-p 3333:3333 -h customer --name customer --link discovery --link account')
-        }
+        } */
 
         stage ('Final') {
             build job: 'gateway-service-pipeline', wait: false
