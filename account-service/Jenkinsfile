@@ -2,7 +2,10 @@
 
 //[code language="java"]
 node {
-
+    
+    def registry = "docker_hub_account/repository_name"
+    def registryCredential = 'dockerhub'
+   
     withMaven(maven:'localmaven') {  // localmaven is what configured in jenkins global configuration
 
         stage('Checkout') {
@@ -19,8 +22,13 @@ node {
 
         stage('Image') {
             dir ('account-service') {
-                def app = docker.build "rahulnallari/sample-spring-microservices:account${env.version}"
+                def registry = "rahulnallari/sample-spring-microservices"
+                def registryCredential = 'dockerhub'
+                def app = docker.build "registry:account${env.version}"
+                def latest = docker.build "registry:account_latest"
+                def login = docker.withRegistry( '', registryCredential )
                 app.push()
+                latest.push
             }
         }
 
