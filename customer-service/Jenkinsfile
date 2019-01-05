@@ -16,8 +16,17 @@ node {
 
         stage('Image') {
             dir ('customer-service') {
-                def app = docker.build "rahulnallari/sample-spring-microservices:customer${env.version}"
-                app.push()
+                   def registry = "rahulnallari/sample-spring-microservices"
+                   def registryCredential = 'dockerhub'
+                   def dockerImage = docker.build "${registry}:account${env.version}"
+                   def latest = docker.build "${registry}:account_latest"
+                   docker.withRegistry( '', registryCredential ) {
+
+                             dockerImage.push()
+
+                             latest.push()
+
+                             }
             }
         }
 
