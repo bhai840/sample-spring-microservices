@@ -1,7 +1,7 @@
- #!/usr/bin/env groovy
- //using hostname.
+#!/usr/bin/env groovy
+# //using hostname.
 
-//[code language="java"]
+#//[code language="java"]
 node {
 
     withMaven(maven:'maven') {
