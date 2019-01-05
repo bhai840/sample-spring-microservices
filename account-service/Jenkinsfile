@@ -21,9 +21,9 @@ node {
             dir ('account-service') {
                 def registry = "rahulnallari/sample-spring-microservices"
                 def registryCredential = 'dockerhub'
-                def app = docker.build "registry:account${env.version}"
-                def latest = docker.build "registry:account_latest"
-                def login = docker.withRegistry( '', registryCredential )
+                def app = docker.build "${registry}:account${env.version}"
+                def latest = docker.build "{registry}:account_latest"
+                def login = docker.withRegistry( '', ${registryCredential} )
                 app.push()
                 latest.push()
             }
