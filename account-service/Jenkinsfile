@@ -26,11 +26,12 @@ node {
                // def registry = "rahulnallari/sample-spring-microservices"
               //  def registryCredential = 'dockerhub'
                  dockerImage = docker.build "${registry}:account${env.version}"
-             //   def latest = docker.build "${registry}:account_latest"
+                 def latest = docker.build "${registry}:account_latest"
               //  app.push()
                  docker.withRegistry( '', registryCredential ) {
 
                              dockerImage.push()
+                             latest.push()
 
                              }
                 
@@ -44,7 +45,7 @@ node {
         } */
 
         stage ('Final') {
-            build job: 'customer-service-pipeline', wait: false
+            build job: 'customer-service', wait: false
         }      
 
     }
