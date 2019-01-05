@@ -20,9 +20,9 @@ node {
 
                    def registryCredential = 'dockerhub'
 
-                   def dockerImage = docker.build "${registry}:account${env.version}"
+                   def dockerImage = docker.build "${registry}:gateway${env.version}"
 
-                   def latest = docker.build "${registry}:account_latest"
+                   def latest = docker.build "${registry}:gateway_latest"
 
                    docker.withRegistry( '', registryCredential ) {
                              dockerImage.push()
