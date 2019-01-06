@@ -1,5 +1,5 @@
 #FROM openjdk
-FROM alpine-java:base
+FROM alpine-java:latest
 MAINTAINER Piotr Minkowski <piotr.minkowski@gmail.com>
 ADD target/discovery-service.jar discovery-service.jar
 ENTRYPOINT ["/usr/bin/java"]
