@@ -12,12 +12,10 @@ node {
             def pom = readMavenPom file:'pom.xml'
             print pom.version
             env.version = pom.version
-           post {
-                success {
-                    archiveArtifacts artifacts: '**/target/*.jar' 
-                    sh 'aws s3 cp **/target/discovery-service.jar s3://kops-state-rahul/springboot/${BUILD_NUMBER}/discovery-service.jar+'
-                   }
-                }
+            
+            sh 'aws s3 cp **/target/discovery-service.jar s3://kops-state-rahul/springboot/${BUILD_NUMBER}/discovery-service.jar'
+                  
+                
         }
 
         stage('Image') {
