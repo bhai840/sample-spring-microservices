@@ -13,7 +13,8 @@ node {
             print pom.version
             env.version = pom.version
             
-            sh 'aws s3 cp **/target/discovery-service.jar s3://kops-state-rahul/springboot/discovery-service.jar //${BUILD_NUMBER}/discovery-service.jar'
+            sh 'aws s3 cp **/target/discovery-service.jar s3://kops-state-rahul/springboot/discovery-service.jar 
+            //${BUILD_NUMBER}/discovery-service.jar'
                   
                 
         }
